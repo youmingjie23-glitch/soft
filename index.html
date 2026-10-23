@@ -39,18 +39,64 @@
     </div>
 
     <script>
+       // 1. 設定你的圖片相對路徑（假設你放在 images 資料夾下）
         const profiles = [
-            {"id": 1, "name": "陳小美", "gender": "女", "age": 25, "occupation": "UI/UX 設計師", "bio": "喜歡看展覽、喝咖啡，尋找有幽默感的另一半。"},
-            {"id": 2, "name": "林大衛", "gender": "男", "age": 28, "occupation": "軟體工程師", "bio": "熱愛戶外運動與 Vibe Coding，希望能找到一起旅行的夥伴。"},
-            {"id": 3, "name": "張雅婷", "gender": "女", "age": 27, "occupation": "鋼琴教師", "bio": "平時喜歡彈琴與貓咪，性格溫和好相處。"}
+            {
+                "id": 1, 
+                "name": "里卡多·米洛斯", 
+                "gender": "男", 
+                "age": 25, 
+                "occupation": "演員", 
+                "avatar": "images/里卡多·米洛斯.jpg", // 👈 修改為你的圖片檔名
+                "bio": "喜歡跳舞，尋找有幽默感的另一半。"
+            },
+            {
+                "id": 2, 
+                "name": "田所浩二", 
+                "gender": "男", 
+                "age": 28, 
+                "occupation": "演員", 
+                "avatar": "images/野獸.png",  // 👈 修改為你的圖片檔名
+                "bio": "熱愛唱歌與演戲，希望能找到一起旅行的夥伴。"
+            },
+            {
+                "id": 3, 
+                "name": "鄧佳華", 
+                "gender": "男", 
+                "age": 27, 
+                "occupation": "網紅", 
+                "avatar": "images/鄧佳華.jpg", // 👈 修改為你的圖片檔名
+                "bio": "平時喜歡挑戰新事物，性格溫和好相處。"
+            },
+            {
+                "id": 4, 
+                "name": "葉玫瑰", 
+                "gender": "女", 
+                "age": 34, 
+                "occupation": "網紅", 
+                "avatar": "images/葉玫瑰.jpg", // 👈 修改為你的圖片檔名
+                "bio": "平時喜歡拍照，性格老實。"
+            },
+            {
+                "id": 5, 
+                "name": "范育青", 
+                "gender": "女", 
+                "age": 25, 
+                "occupation": "網紅", 
+                "avatar": "images/范育青.jpg", // 👈 修改為你的圖片檔名
+                "bio": "平時喜歡記錄生活，極度渴望另一半。"
+            }
         ];
 
+        // 2. 修改渲染卡片的 HTML，改為讀取 <img> 標籤
         function renderProfiles(list) {
             const grid = document.getElementById('cardGrid');
             grid.innerHTML = list.map(person => `
                 <div class="card">
                     <div>
-                        <div class="avatar">${person.gender === '女' ? '👩' : '👨'}</div>
+                        <div class="avatar">
+                            <img src="${person.avatar}" alt="${person.name}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                        </div>
                         <h3>${person.name} (${person.age}歲)</h3>
                         <div class="tags">
                             <span class="tag">${person.gender}</span>
