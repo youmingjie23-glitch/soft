@@ -35,44 +35,51 @@
             <button class="filter-btn" onclick="filterGender('男', this)">只看男性</button>
         </div>
 
-        <div class="card-grid" id="cardGrid">
-            {% for person in profiles %}
-            <div class="card" data-gender="{{ person.gender }}">
-                <div>
-                    <div class="avatar">
-                        {% if person.gender == '女' %}👩{% else %}👨{% endif %}
-                    </div>
-                    <h3>{{ person.name }} ({{ person.age }}歲)</h3>
-                    <div class="tags">
-                        <span class="tag">{{ person.gender }}</span>
-                        <span class="tag">{{ person.occupation }}</span>
-                    </div>
-                    <p class="bio">{{ person.bio }}</p>
-                </div>
-                <button class="like-btn" onclick="sendHeart('{{ person.name }}')">💖 發送心動</button>
-            </div>
-            {% endfor %}
-        </div>
+        <div class="card-grid" id="cardGrid"></div>
     </div>
 
     <script>
+        const profiles = [
+            {"id": 1, "name": "陳小美", "gender": "女", "age": 25, "occupation": "UI/UX 設計師", "bio": "喜歡看展覽、喝咖啡，尋找有幽默感的另一半。"},
+            {"id": 2, "name": "林大衛", "gender": "男", "age": 28, "occupation": "軟體工程師", "bio": "熱愛戶外運動與 Vibe Coding，希望能找到一起旅行的夥伴。"},
+            {"id": 3, "name": "張雅婷", "gender": "女", "age": 27, "occupation": "鋼琴教師", "bio": "平時喜歡彈琴與貓咪，性格溫和好相處。"}
+        ];
+
+        function renderProfiles(list) {
+            const grid = document.getElementById('cardGrid');
+            grid.innerHTML = list.map(person => `
+                <div class="card">
+                    <div>
+                        <div class="avatar">${person.gender === '女' ? '👩' : '👨'}</div>
+                        <h3>${person.name} (${person.age}歲)</h3>
+                        <div class="tags">
+                            <span class="tag">${person.gender}</span>
+                            <span class="tag">${person.occupation}</span>
+                        </div>
+                        <p class="bio">${person.bio}</p>
+                    </div>
+                    <button class="like-btn" onclick="sendHeart('${person.name}')">💖 發送心動</button>
+                </div>
+            `).join('');
+        }
+
         function filterGender(gender, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                if (gender === 'all' || card.dataset.gender === gender) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            if (gender === 'all') {
+                renderProfiles(profiles);
+            } else {
+                renderProfiles(profiles.filter(p => p.gender === gender));
+            }
         }
 
         function sendHeart(name) {
             alert('已成功向 ' + name + ' 發送心動訊號！💕');
         }
+
+        // 初始渲染
+        renderProfiles(profiles);
     </script>
 </body>
 </html>
