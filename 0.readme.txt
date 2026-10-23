@@ -1,0 +1,17 @@
+====================================
+相親配對系統 (Dating Match System)
+====================================
+
+專案說明：
+本專案為 Git / GitHub 測試練習專案，模擬簡單的相親會員資料管理與配對介面。
+
+功能簡介：
+1. 會員列表展示與配對條件篩選
+2. 資料庫 Schema (profiles.sql)
+3. FastAPI 網頁服務核心 (main.py)
+
+測試 Git 指令：
+- git status
+- git add .
+- git commit -m "feat: initial commit for dating project"
+- git push origin main
